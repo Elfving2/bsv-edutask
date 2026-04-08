@@ -1,8 +1,11 @@
-# import pytest
-# from src.util.helpers import ValidationHelper
+import pytest
+import unittest.mock
 
-# @pytest.mark.unit
-# def test_validateAge():
-#     result = ValidationHelper.validateAge(25)
-#     assert result == True
+
+def test_validationAge():
+    mock_usercontroller = mock.MagicMock()
+    mock_usercontroller.get.return_value = {'age': 25}
+    
+
+
 
