@@ -9,6 +9,10 @@ from src.util.helpers import hasAttribute
 def obj():
     return {'name': 'Jane'}
 
+@pytest.fixture
+def obj_empty():
+    return {}
+
 @pytest.mark.unit
 def test_hasAttribute(obj):
     result = hasAttribute(obj, 'name')
@@ -19,8 +23,10 @@ def test_hasAttribute_not_exists(obj):
     result = hasAttribute(obj, 'age')
     assert result == False
 
-
-
+@pytest.mark.unit
+def test_hasAttribute_empty(obj_empty):
+    result = hasAttribute(obj_empty, 'name')
+    assert result == False
 
 
 

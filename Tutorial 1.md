@@ -190,17 +190,17 @@ Open `src/util/helpers.py` and read the `validateAge` method in the `ValidationH
 
 Fill in the expected return value for each age:
 
-| #   | `user['age']` | Expected |
-| --- | ------------- | -------- |
-| 1   | -1            | ?        |
-| 2   | 0             | ?        |
-| 3   | 1             | ?        |
-| 4   | 17            | ?        |
-| 5   | 18            | ?        |
-| 6   | 19            | ?        |
-| 7   | 119           | ?        |
-| 8   | 120           | ?        |
-| 9   | 121           | ?        |
+| #   | `user['age']` | Expected        |
+| --- | ------------- | --------        |
+| 1   | -1            | invalid         |
+| 2   | 0             | underage        |
+| 3   | 1             | underage        |
+| 4   | 17            | underage        |
+| 5   | 18            | underage        |
+| 6   | 19            | valid           |
+| 7   | 119           | valid           |
+| 8   | 120           | valid           |
+| 9   | 121           | invalid         |
 
 </details><br>
 
