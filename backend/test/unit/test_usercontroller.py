@@ -28,7 +28,7 @@ def test_get_user_by_email_valid(usercontroller):
     assert usercontroller.get_user_by_email(email) == {'email': email}
 
 #
-# Test if pirnt statement is correctly printed when multiple users are found with the same email address
+# Test if print statement is correctly printed when multiple users are found with the same email address
 #
 @pytest.mark.unit
 def test_get_user_by_email_multiple(usercontroller, capsys):
@@ -42,7 +42,8 @@ def test_get_user_by_email_multiple(usercontroller, capsys):
     assert captured.out == f'Error: more than one user found with mail {email}\n'
 
 #
-# validate if method returns the first user when multiple users are found with the same email address
+# validate if method returns the first user when multiple users are found with the same 
+# email address
 #
 
 @pytest.mark.unit
@@ -56,8 +57,8 @@ def test_get_return_user_by_email_multiple(usercontroller):
 
 #
 #  This test validates if email is valid but no user is found with that email
-#  address will raise a value error becuase we return the first element of the list even if the user dosent exist 
-#  So this is a bug 
+#  address will raise a value error because we return the first element of the list 
+#  even if the user doesn't exist. So this is a bug 
 #
 
 @pytest.mark.unit
@@ -70,8 +71,7 @@ def test_get_user_by_email_no_user(usercontroller):
 
 
 #
-# This test test the code when there is an error in the database operation
-# Dosent  
+# This test test the code when there is an error in the database operation doesn't  
 #
 
 @pytest.mark.unit
