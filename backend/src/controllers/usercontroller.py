@@ -27,7 +27,7 @@ class UserController(Controller):
 
         if not re.fullmatch(emailValidator, email):
             raise ValueError('Error: invalid email address')
-
+        
         try:
             users = self.dao.find({'email': email})
             if len(users) == 1:
