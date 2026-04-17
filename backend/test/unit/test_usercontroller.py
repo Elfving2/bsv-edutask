@@ -64,9 +64,10 @@ def test_get_return_user_by_email_multiple(usercontroller):
 @pytest.mark.unit
 def test_get_user_by_email_no_user(usercontroller):
     email ="nonexisting@email.com"
-    with pytest.raises(IndexError, match="list index out of range"):
-        usercontroller.dao.find.return_value = []
+    usercontroller.dao.find.return_value = None
+    with pytest.raises(TypeError):
         usercontroller.get_user_by_email(email)
+
 
 
 
