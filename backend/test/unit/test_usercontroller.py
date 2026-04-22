@@ -70,10 +70,9 @@ def test_get_user_by_email_no_user(usercontroller):
 
 
 
-
-#
-# This test test the code when there is an error in the database operation doesn't  
-#
+ #
+ # This test test the code when there is an error in the database operation doesn't  
+ #
 
 @pytest.mark.unit
 def test_get_user_by_email_db_error(usercontroller):
