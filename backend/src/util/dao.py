@@ -13,7 +13,6 @@ from bson.objectid import ObjectId
 
 
 class DAO:
-
     def __init__(self, collection_name: str):
         """Establish a data access object to a collection of the given name in the MongoDB database as specified in the environment variables. When the collection is first creted, it will be associated to a validator (see https://www.mongodb.com/docs/manual/core/schema-validation/) to ensure some basic data compliance.
 
