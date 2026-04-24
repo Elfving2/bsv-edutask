@@ -78,14 +78,11 @@ def test_perfect_score_is_grade_a():
     assert assigner.assign(100, 100) == "A"
 ```
 
-</details><br>
-
-> **Why is this still an integration test?** `GradeAssigner.assign` calls `normalizer.percentage` to get the percentage, then applies its own threshold logic. A unit test of `GradeAssigner` would mock the normalizer and pass in percentages directly — the collaboration between the two classes would never run. The integration test exercises both.
-
-Run `pytest test/student/integration/ -v` and confirm all tests pass.
-
-Once you are ready to compare, open the solution: [test/\_solutions/integration/basics/test_grade_assigner_integration.py](../test/_solutions/integration/basics/test_grade_assigner_integration.py)
-
+<    /details><br>
+ 
+ > **Why is this still an integration test?** `GradeAssigner.assign` calls `normalizer.percentage` to get the percentage, then applies  its own threshold logic. A unit test of `GradeAssigner` would mock the normalizer and pass in percentages directly — the collaboration b etween the two classes would never run. The integration test exercises both.
+ 
+   
 ## Test Example 3: A Component That Calls Its Dependency Multiple Times — `PriceFormatter` and `ReceiptPrinter`
 
 Open [src/integration/basics/price_formatter.py](../src/integration/basics/price_formatter.py). `PriceFormatter` has one method: `format(amount)`, which returns a price string like `"12.50 SEK"`.
