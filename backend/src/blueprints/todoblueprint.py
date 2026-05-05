@@ -49,3 +49,29 @@ def get_todo(id):
     except Exception as e:
         print(f'{e.__class__.__name__}: {e}')
         abort(500, 'Unknown server error')
+
+# obtain all todos
+@todo_blueprint.route('/all', methods=['GET'])
+@cross_origin()
+def get_all_todos():
+    try:
+        todos = controller.get_all()
+        return jsonify(todos), 200
+    except Exception as e:
+        print(f'{e.__class__.__name__}: {e}')
+        abort(500, 'Unknown server error')
+
+# delete all todos
+@todo_blueprint.route('/all', methods=['DELETE'])
+@cross_origin()
+def delete_all_todos():
+    try:
+        todos = controller.get_all()
+        deleted_count = 0
+        for todo in todos:
+            controller.delete(todo['_id']['$oid'])
+            deleted_count += 1
+        return jsonify({'deleted': deleted_count}), 200
+    except Exception as e:
+        print(f'{e.__class__.__name__}: {e}')
+        abort(500, 'Unknown server error')
