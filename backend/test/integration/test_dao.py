@@ -1,22 +1,46 @@
 import pytest
 from src.util.dao import DAO
+from unittest.mock import patch
 
 
-#
+def temp_user():
+    return {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "required": ["firstName", "lastName", "email"],
+            "properties": {
+                "firstName": {
+                    "bsonType": "string",
+                    "description": "must be a string and is required"
+                },
+                "lastName": {
+                    "bsonType": "string",
+                    "description": "must be a string and is required"
+                },
+                "email": {
+                    "bsonType": "string",
+                    "description": "must be a string and is required"
+                }
+            }
+        }
+    }
+
 #
 # sets up Dao for user testing and drops the collection after the test is done
 #
+
 @pytest.fixture
 def dao_setup():
-    dao = DAO("user")
-    yield dao
-    dao.drop()
+    with patch('src.util.dao.getValidator', return_value=temp_user()):
+        dao = DAO("name_dosent_matter")
+        yield dao
+        dao.drop()
 
 
-#
 #
 # tests the create method of the Dao with correct data
 #
+
 @pytest.mark.integration
 @pytest.mark.parametrize("user_data", [
 {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com"},
