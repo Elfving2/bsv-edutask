@@ -48,10 +48,10 @@ function TaskView(props) {
         : <p>Here you can find your {tasks.length} task{tasks.length === 1 ? '' : 's'}. Click on each thumbnail in the list to add, update, or delete the todo items you have associated to this video.</p>}
       <div className='container'>
         {tasks.map(task =>
-          <div className='container-element' key={task.id}>
+          <div className='container-element' key={task._id}>
             <a onClick={() => { setTrigger(true); setFocus(task) }}>
               <img src={`http://i3.ytimg.com/vi/${task.url}/hqdefault.jpg`} alt='' />
-              { task.done ? <div className="done-overlay"><div className="done-check"></div></div> : <div></div>}
+              {task.done ? <div className="done-overlay"><div className="done-check"></div></div> : <div></div>}
               <div className="title-overlay">{task.title}</div>
             </a>
           </div>)}

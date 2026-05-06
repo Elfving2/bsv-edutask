@@ -1,6 +1,6 @@
 import pytest
 from src.util.dao import DAO
-from unittest.mock import patch
+from unittest.mock import   patch
 
 
 def temp_user():
