@@ -53,3 +53,14 @@ def get(id):
     except Exception as e:
         print(f'{e.__class__.__name__}: {e}')
         abort(500, 'Unknown server error')
+
+# obtain all tasks associated to a specific user
+@task_blueprint.route('/ofuser/<id>', methods=['GET'])
+@cross_origin()
+def get_tasks_of_user(id):
+    try:
+        tasks = controller.get_tasks_of_user(id)
+        return jsonify(tasks), 200
+    except Exception as e:
+        print(f'{e.__class__.__name__}: {e}')
+        abort(500, 'Unknown server error')
