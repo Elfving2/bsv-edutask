@@ -56,7 +56,7 @@ function TaskDetail({ taskid, updateTasks }) {
                 console.error(error)
             });
 
-        
+
         setTodo("");
     }
 
