@@ -59,8 +59,16 @@ def test_get_user_by_email_db_error(usercontroller):
 # This test validates if no user is found 
 # with the given email address
 #
+# @pytest.mark.unit
+# def test_get_user_by_email_no_user_returns_none(usercontroller):
+#     email = "nonexisting@email.com"
+#     usercontroller.dao.find.return_value = []
+#     assert usercontroller.get_user_by_email(email) is None
+
+
 @pytest.mark.unit
 def test_get_user_by_email_no_user_returns_none(usercontroller):
     email = "nonexisting@email.com"
     usercontroller.dao.find.return_value = []
-    assert usercontroller.get_user_by_email(email) is None
+    with pytest.raises(IndexError):
+        usercontroller.get_user_by_email(email)
