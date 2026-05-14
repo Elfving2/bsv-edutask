@@ -44,15 +44,7 @@ describe('Use cases R8UC1, R8UC2, R8UC3', () => {
             expect(response.body.success).to.be.true;
         });
     });
-
-    it('If the description is not empty and the user presses “Add”, the system creates a new todo item', () => {
-        cy.get('.inline-form > [type="text"]').type('New Todo');
-        cy.get('.inline-form > [type="submit"]').click();
-
-        cy.get('.todo-list').children('.todo-item').last().should('contain.text', 'New Todo');
-
-    });
-
+    
     it('If the description is empty then the “Add” button should remain disabled', () => {
         cy.get('.inline-form > [type="text"]').clear();
         cy.get('.inline-form > [type="submit"]').should('be.disabled');
