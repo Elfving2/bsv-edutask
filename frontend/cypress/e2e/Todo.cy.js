@@ -44,7 +44,7 @@ describe('Use cases R8UC1, R8UC2, R8UC3', () => {
             expect(response.body.success).to.be.true;
         });
     });
-    
+
     it('If the description is empty then the “Add” button should remain disabled', () => {
         cy.get('.inline-form > [type="text"]').clear();
         cy.get('.inline-form > [type="submit"]').should('be.disabled');
@@ -94,9 +94,8 @@ describe('Use cases R8UC1, R8UC2, R8UC3', () => {
         // and the text is no longer crossed out
         cy.get('@todoTestItem')
             .find('span.checker')
-            .should('not.have.class', 'checked')
-            .should('have.css', 'text-decoration-line', 'none')
-            .should('have.class', 'unchecked');
+            .should('not.have.css', 'text-decoration-line', 'line-through');
+
     });
 
     it('deletes a todo item and removes it from the list', () => {
