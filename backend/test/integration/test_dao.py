@@ -1,6 +1,7 @@
 import pytest
 from src.util.dao import DAO
-from unittest.mock import   patch
+from unittest.mock import patch
+from pymongo.errors import PyMongoError
 
 
 def temp_user():
@@ -43,14 +44,15 @@ def dao_setup():
 
 @pytest.mark.integration
 @pytest.mark.parametrize("user_data", [
-{"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com"},
-{"firstName": "Jane", "lastName": "Smith", "email": "jane.smith@example.com"},
-{"firstName": "Alice", "lastName": "Johnson", "email": "alice.johnson@example.com"}
+    {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com"},
+    {"firstName": "Jane", "lastName": "Smith", "email": "jane.smith@example.com"},
+    {"firstName": "Alice", "lastName": "Johnson", "email": "alice.johnson@example.com"}
 ])
 def test_with_correct_data(dao_setup, user_data):
     dao = dao_setup
     result = dao.create(user_data)
 
+    assert "_id" in result
     assert result["firstName"] == user_data["firstName"]
     assert result["lastName"] == user_data["lastName"]
     assert result["email"] == user_data["email"]
@@ -107,4 +109,30 @@ def test_with_duplicate_email(dao_setup):
         dao.create(user_data)
 
 
+#
+# tests the create method of the Dao when MongoDB insert operation fails
+#
+@pytest.mark.integration
+def test_create_when_mongodb_insert_fails(dao_setup):
+    dao = dao_setup
+    user_data = {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com"
+    }
 
+    with patch.object(dao.collection, "insert_one", side_effect=PyMongoError("Insert failed")):
+        with pytest.raises(PyMongoError):
+            dao.create(user_data)
+
+
+#
+# tests the create method of the Dao with non-dictionary input
+#
+@pytest.mark.integration
+@pytest.mark.parametrize("invalid_input", [None, [], "not a dictionary", 123,True])
+def test_create_with_non_dictionary_input(dao_setup, invalid_input):
+    dao = dao_setup
+
+    with pytest.raises(Exception):
+        dao.create(invalid_input)
